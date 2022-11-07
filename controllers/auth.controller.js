@@ -50,7 +50,7 @@ const registro = async (req = request, res = response) => {
             name: name,
             email: email,
             msg: 'Usuario creado de manera exitosa',
-            tokenJWT: tokenJWT
+            jwt: tokenJWT
         })
 
     } catch (error) {
