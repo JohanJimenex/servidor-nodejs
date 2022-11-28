@@ -12,14 +12,9 @@ const validarCampos = (req = request, res = response, continua) => {
         })
     }
 
-    continua();// con ersta funcion continua el flujo si no hay error
+    continua();// con esta funcion continua el flujo si no hay error
 
 }
-
-
-// function validarCampos(algo) {
-//     console.log(algo);
-// }
 
 
 module.exports = {

@@ -6,7 +6,7 @@ const { generarJWT } = require("../helpers/jwt");
 const { set } = require("mongoose");
 
 // decimos que el res que viene como referencia es igual a response que es un objeto que existe en express
-// para poder tener el tipado y sus metodos, importado ariba
+// es un truquito para poder tener el tipado y sus metodos, importado ariba
 
 const registro = async (req = request, res = response) => {
 
@@ -35,7 +35,7 @@ const registro = async (req = request, res = response) => {
         const sal = bcrypt.genSaltSync(); //bcrypt genera un string aleatorio,
 
         // cambiamos la clave del nuestro objeto usuario local que puso el usuario por una encriptada.
-        usuario.password = bcrypt.hashSync(password, sal);//.hasSync liga el stirng aleatorio con la clave
+        usuario.password = bcrypt.hashSync(password, sal);//.hashSync liga el stirng aleatorio con la clave y lo retorna
 
         //Paso 4: Generar JWT
         const tokenJWT = await generarJWT(usuario.id, name) //esto devuelve el jwt que es un stirng de 3 piezas dividido por un punto .
@@ -69,9 +69,8 @@ const login = async (req = request, res = response) => {
     // console.log(req.query);
     // console.log(req.params);
 
-    // const errors = validationResult(req);
-    // console.log(errors);
-
+    // const errors = validationResult(req); // nos llevamos esto a un archiovo aparte para reuytilizarlo
+ 
     //validamos el con el metodo isEmpty() si tiene alguno de los campos errores , si es asi devolvemos un status y opcional los errores
     //lo movimos a una funcion middlwware para reutilizarlo para las otras apis
     // if (!errors.isEmpty()) {
@@ -83,6 +82,11 @@ const login = async (req = request, res = response) => {
     const { email, password } = req.body;
 
     try {
+        // const usuariosDesdeDB = await Usuario.find() // Devuelve todos los usuarios y sus propeidades
+        // const usuariosDesdeDB = await Usuario.find({},'nombre') // Devuelve todos los usuarios pero solo con la propiedad 'nombre' y el id por defecto
+        // const usuariosDesdeDB = await Usuario.find({}, 'nombre email etc') // igual que arriba pero con mas campos
+        // const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, {nombre: 'nuevo', email:'nuevo'}, {new:true}) //para actualizar un registro, ver video 113 Angular Avanzado, el new en tru es para que retorne el nuevo usuario actualziado
+        // const usuarioActualizado = await Usuario.findByIdAndDelete(uid) //para eliminar un registro, ver video 115 Angular Avanzado, el new en tru es para que retorne el nuevo usuario actualziado
         // si existe un usuario con ese correo me devuelve un objeto con sus propiedades incluyendo password (encriptada por nosotro)
         const usuarioDesdeDB = await Usuario.findOne({ email: email })
 

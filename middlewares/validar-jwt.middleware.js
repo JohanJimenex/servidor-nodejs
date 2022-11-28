@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 
 const validarJWTMiddleWare = (req = request, res = response, continuar) => {
 
-    const tokenJWTRecibidoDelFrontned = req.header('jwt');
+    const JWTokenRecibidoDelFrontend = req.header('jwt');
 
-    console.log(tokenJWTRecibidoDelFrontned);
+    console.log(JWTokenRecibidoDelFrontend);
 
-    if (!tokenJWTRecibidoDelFrontned) {
+    if (!JWTokenRecibidoDelFrontend) {
         return res.status(401).json({
             ok: false,
             msg: "JWToken invalido"
@@ -18,7 +18,7 @@ const validarJWTMiddleWare = (req = request, res = response, continuar) => {
         // Desencriptamos el jwt, con la firma/clave que le habiamos puesto en la creacion
         //Si lo desencripta nos  dará el objeto, el cual solo nos interesa el uid y name
         //mientras pueda desncriptar el JWT quiere decir que esta todo bien y el usuario frontned puede seguir navengando
-        const { uid, name } = jwt.verify(tokenJWTRecibidoDelFrontned, process.env.SECRET_JWT_SEED);
+        const { uid, name } = jwt.verify(JWTokenRecibidoDelFrontend, process.env.SECRET_JWT_SEED);
 
         //agregamos estas propiedades a la reques, para poder leerla desde el controlador, y devolverlo al frontned
         req.uid = uid;
