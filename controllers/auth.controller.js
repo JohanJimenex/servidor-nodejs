@@ -70,7 +70,7 @@ const login = async (req = request, res = response) => {
     // console.log(req.params);
 
     // const errors = validationResult(req); // nos llevamos esto a un archiovo aparte para reuytilizarlo
- 
+
     //validamos el con el metodo isEmpty() si tiene alguno de los campos errores , si es asi devolvemos un status y opcional los errores
     //lo movimos a una funcion middlwware para reutilizarlo para las otras apis
     // if (!errors.isEmpty()) {
@@ -83,8 +83,10 @@ const login = async (req = request, res = response) => {
 
     try {
         // const usuariosDesdeDB = await Usuario.find() // Devuelve todos los usuarios y sus propeidades
+        // const usuariosDesdeDB = await Usuario.find().skip(3).limit(6)// ingora los primeros 3 y trae maximo 6 
         // const usuariosDesdeDB = await Usuario.find({},'nombre') // Devuelve todos los usuarios pero solo con la propiedad 'nombre' y el id por defecto
         // const usuariosDesdeDB = await Usuario.find({}, 'nombre email etc') // igual que arriba pero con mas campos
+        // const usuariosDesdeDB = await Usuario.find().populate('usuario','nombre email etc').populate('otra referdo x') // buscar un referido video 128 angular avanzado
         // const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, {nombre: 'nuevo', email:'nuevo'}, {new:true}) //para actualizar un registro, ver video 113 Angular Avanzado, el new en tru es para que retorne el nuevo usuario actualziado
         // const usuarioActualizado = await Usuario.findByIdAndDelete(uid) //para eliminar un registro, ver video 115 Angular Avanzado, el new en tru es para que retorne el nuevo usuario actualziado
         // si existe un usuario con ese correo me devuelve un objeto con sus propiedades incluyendo password (encriptada por nosotro)
@@ -156,3 +158,5 @@ module.exports = {
     registro: registro,
     validarJWT: validarJWT
 };
+
+

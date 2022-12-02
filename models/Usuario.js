@@ -19,8 +19,13 @@ const UsuarioSchema = Schema({
     password: {
         type: String,
         required: true
-    }
-})
+    },
+    // Universidad: { // Esto es para relacionar las propiedades con otra tabla/registro
+    //     require:true,
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Universidad' // se debe colocar el nombre de la coleccion/tabla con la cual se relaciona, video 123 Angular Avanzado
+    // }
+}, {collection:'NombreColeccionnDeseado'}) // con esto personalzamos el nombre de la coleccion en vez de dejarlo por defecto es opcional
 
 //Con este código soobreescribiremos el _id por defecto que mongoDB le asigna a los registros
 //Pero no es necesario para esta aplicación ya quee este metodo lo copié de otro curso y ademas ya retornamos un objeto armado por mi

@@ -26,6 +26,7 @@ router.post('/',  [
 
 //Ruta para crear nuevo usuario
 router.post('/registro', [
+    //check('id', 'El id no es valido').isMongoId(), esto es de angular avanzado
     check('name', 'El nombre es obligatorio').not().isEmpty(),
     check('email', 'El correo es no es valido').isEmail().isLength({ min: 1 }),
     check('password', 'La contraseña minimo de 6 digitos es obligatoria').isLength({ min: 6 }),
